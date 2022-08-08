@@ -12,7 +12,7 @@ class Talks(commands.Cog):
     async def send_hello(self,ctx): #quando mandar !oi, o bot responde Olá, 'nome'
         name = ctx.author.name
 
-        response = "Olá, " + name
+        response = "Eaeeeee, " + name
 
         await ctx.send(response)
 
