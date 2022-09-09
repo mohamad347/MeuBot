@@ -1,10 +1,17 @@
+from fileinput import filename
 from discord.ext import commands
 '''from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options'''
 from decouple import config
 import requests
+import random
 from bs4 import BeautifulSoup
+import urllib.request
+from random import randint
+import os
+import shutil
+import discord
 
 
 class Crypto(commands.Cog):
@@ -80,15 +87,45 @@ class Crypto(commands.Cog):
         content = BeautifulSoup(site.text,'html.parser')
 
         fofocas = content.findAll('div',attrs={'class':'featured-post category-famosos'})
+        fofoca = random.choice(fofocas)
 
-        for fofoca in fofocas:
+
+        title = fofoca.find('h2',attrs={'class':'featured-title'} )
+        link = fofoca.find('a',attrs={'class':'featured-content'} )
+        image = fofoca.find('img',attrs={'class':'image-thumb'})
+
+        #await ctx.send('Manchete: ' + title.text)
+        #await ctx.send('Imagem: ' + image['src'])
+        #await ctx.send('Link: ' + link['href']+'\n')
+
+        x = 0
+        arq = fr'C:\USP\programaçao\MeuBot\Images\fofoca{x}'
+        while os.path.exists(arq):
+            x = x + 1
+            arq = fr'C:\USP\programaçao\MeuBot\Images\fofoca{x}'
+
+        file_name = f'fofoca{x}'
+        urllib.request.urlretrieve(image['src'],f'{file_name}.jpeg')
+
+       # with open(my_filename, "rb") as fh:
+           # f = discord.File(fh, filename=my_filename)
+        #await ctx.send(file=f)
+        await ctx.send('Manchete: ' + title.text)
+        with open(file_name+'.jpeg','rb') as fh:
+            f = discord.File(fh,filename=file_name)
+        await ctx.send(file=f)
+        await ctx.send('Link: ' + link['href'])
+
+        shutil.move(f'fofoca{x}.jpeg',r'C:\USP\programaçao\MeuBot\Images')
+
+        '''for fofoca in fofocas:
             title = fofoca.find('h2',attrs={'class':'featured-title'} )
             link = fofoca.find('a',attrs={'class':'featured-content'} )
             image = fofoca.find('img',attrs={'class':'image-thumb'})
 
             await ctx.send('Manchete: ' + title.text)
             await ctx.send('Imagem: ' + image['src'])
-            await ctx.send('Link: ' + link['href']+'\n')
+            await ctx.send('Link: ' + link['href']+'\n')'''
 
 
 def setup(bot):
