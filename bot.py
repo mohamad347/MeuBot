@@ -19,7 +19,3 @@ if __name__=='__main__':
     TOKEN = config('TOKEN')
     bot.run(TOKEN)
 
-'''import os
-
-for file in os.listdir('commands'):
-    print(file[:-3]) #tirar os .py no nome'''

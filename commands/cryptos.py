@@ -1,8 +1,5 @@
 from fileinput import filename
 from discord.ext import commands
-'''from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options'''
 from decouple import config
 import requests
 import random
@@ -12,6 +9,16 @@ from random import randint
 import os
 import shutil
 import discord
+import PIL.Image
+# Adding the GUI interface
+from tkinter import *
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+import time
 
 
 class Crypto(commands.Cog):
@@ -107,25 +114,18 @@ class Crypto(commands.Cog):
         file_name = f'fofoca{x}'
         urllib.request.urlretrieve(image['src'],f'{file_name}.jpeg')
 
-       # with open(my_filename, "rb") as fh:
-           # f = discord.File(fh, filename=my_filename)
-        #await ctx.send(file=f)
+        arq = f"fofoca{x}.jpeg"
+        img = PIL.Image.open(f"fofoca{x}.jpeg")
+        img.save(f"fofoca{x}.png")
+        
         await ctx.send('Manchete: ' + title.text)
-        with open(file_name+'.jpeg','rb') as fh:
-            f = discord.File(fh,filename=file_name)
-        await ctx.send(file=f)
+        await ctx.send(file=discord.File(f"fofoca{x}.png"))
         await ctx.send('Link: ' + link['href'])
 
-        shutil.move(f'fofoca{x}.jpeg',r'C:\USP\programaçao\MeuBot\Images')
-
-        '''for fofoca in fofocas:
-            title = fofoca.find('h2',attrs={'class':'featured-title'} )
-            link = fofoca.find('a',attrs={'class':'featured-content'} )
-            image = fofoca.find('img',attrs={'class':'image-thumb'})
-
-            await ctx.send('Manchete: ' + title.text)
-            await ctx.send('Imagem: ' + image['src'])
-            await ctx.send('Link: ' + link['href']+'\n')'''
+        #shutil.move(f'fofoca{x}.jpeg',r'C:\USP\programaçao\MeuBot\Images')
+        os.remove(f'fofoca{x}.jpeg')
+        os.remove(f'fofoca{x}.png')
+    
 
 
 def setup(bot):
