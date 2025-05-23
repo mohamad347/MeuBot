@@ -2,7 +2,7 @@
 
 Bot do discord feito para automatizar e melhorar o ambiente do discord.
 
-### ALgumas funcionalidades
+### Algumas funcionalidades
 - Monitorar posts do instagram
 - Pegar dados de clima de algum local
-- Obter facilmente as útimas notcias do dia
+- Obter facilmente as últimas notícias do dia
