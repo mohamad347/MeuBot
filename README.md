@@ -1,3 +1,8 @@
 # Bot do Discord
 
-Fiz aqui meu primeiro bot do discord e adicionei algumas mudanças.
+Bot do discord feito para automatizar e melhorar o ambiente do discord.
+
+### ALgumas funcionalidades
+- Monitorar posts do instagram
+- Pegar dados de clima de algum local
+- Obter facilmente as útimas notcias do dia

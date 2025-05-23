@@ -21,7 +21,6 @@ class Manager(commands.Cog):
             await message.channel.send(f"VAI DORMIR, {message.author.name}!") 
             await message.delete()
 
-        #await self.bot.process_commands(message)  não precisa mais aqui, se não ele manda 2x
 
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
